@@ -21,17 +21,21 @@ This Linux miscellaneous driver converts alphabetic text into Morse code signals
 ## Build the Module:
 1. Please see the makefile's content to fit your system
 2. Open a terminal in the project directory and run:
+
     ``` bash 
     make
     ```
 
 ## Load the Module
+
     ```bash
     sudo insmod morse-code.ko
     ```
+
 ## Verify the Device File:
 
 ## Ensure that the device file is created at /dev/morse-code:
+
     ```bash
     ls /dev/morse-code
     ```
@@ -42,6 +46,7 @@ This Linux miscellaneous driver converts alphabetic text into Morse code signals
 ## Writing Text to Flash Morse Code
 
 To convert text to Morse code and flash the LED:
+
     ``` bash
     echo "HELLO WORLD" > /dev/morse-code
     ```
@@ -52,9 +57,11 @@ To convert text to Morse code and flash the LED:
 ## Reading Morse Symbols from the FIFO
 
 To read the sequence of Morse symbols from the FIFO:
+
     ```bash
     cat /dev/morse-code
     ```
+
     Outputs the sequence of dots (.), dashes (-), letter spaces (single space), and word spaces (three spaces).
 
 ## Behavior Details
