@@ -1,7 +1,5 @@
 /*
- * demo_ledtrig.c
- * - Demonstrate how to flash an LED using a custom trigger.
- *      Author: Brian Fraser
+ *  *  *      Author: Abay Kulamkadyr 
  */
 #include <linux/module.h>
 #include <linux/miscdevice.h>		// for misc-driver calls.

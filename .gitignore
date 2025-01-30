@@ -1,0 +1,9 @@
+# Ignore compiled kernel modules and object files
+*.ko
+*.o
+*.mod*
+*.cmd
+
+# Ignore build metadata
+Module.symvers
+modules.order
