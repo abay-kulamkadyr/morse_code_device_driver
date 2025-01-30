@@ -44,7 +44,7 @@ This Linux miscellaneous driver converts alphabetic text into Morse code signals
     sudo insmod morse-code.ko
     ```
 
-1 Verify the Device File:
+4. Verify the Device File:
 
 - Ensure that the device file is created at /dev/morse-code
     ```bash
