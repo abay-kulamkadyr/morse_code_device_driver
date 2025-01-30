@@ -18,24 +18,35 @@ This Linux miscellaneous driver converts alphabetic text into Morse code signals
     LED Configuration: An LED configured with the morse-code trigger (see LED Configuration).
 
 ## Installation
-## Build the Module:
-1. Please see the makefile's content to fit your system
-2. Open a terminal in the project directory and run:
+1. Please see the makefile's content and modify the following environment variables to fit your system:
+    - KERNEL_SRC:
+        - The path to your Linux kernel source. This directory should contain the kernel's Makefile and other necessary build files. It's crucial for compiling the module against the correct kernel version.
 
-    ``` bash 
+    - CROSS_COMPILE:
+        - The prefix for your cross-compiler tools. For ARM architectures, this might be something like arm-linux-gnueabihf-. Ensure that the cross-compiler is installed and accessible in your system's PATH.
+
+    - CORES:
+        - The number of parallel jobs to run during compilation. Setting this to the number of available CPU cores can speed up the build process.
+
+    - BUILD_ID:
+
+        - An identifier for the build. This can help differentiate between different builds, especially when deploying to multiple environments.
+
+    - PUBLIC_DRIVER_DIR:
+        - The directory where the compiled .ko (kernel object) files will be copied after a successful build. This is useful for deploying the module to other systems or directories.
+
+2. Open a terminal in the project directory and run:
+    ```bash 
     make
     ```
-
-## Load the Module
-
-    ```bash
+3. Load the Module
+    ```bash 
     sudo insmod morse-code.ko
     ```
 
-## Verify the Device File:
+1 Verify the Device File:
 
-## Ensure that the device file is created at /dev/morse-code:
-
+- Ensure that the device file is created at /dev/morse-code
     ```bash
     ls /dev/morse-code
     ```
@@ -46,10 +57,9 @@ This Linux miscellaneous driver converts alphabetic text into Morse code signals
 ## Writing Text to Flash Morse Code
 
 To convert text to Morse code and flash the LED:
-
-    ``` bash
-    echo "HELLO WORLD" > /dev/morse-code
-    ```
+```bash
+echo "HELLO WORLD" > /dev/morse-code
+```
 
     The LED will flash according to Morse code for the input text.
     Spaces between words will trigger a longer pause.
@@ -57,10 +67,9 @@ To convert text to Morse code and flash the LED:
 ## Reading Morse Symbols from the FIFO
 
 To read the sequence of Morse symbols from the FIFO:
-
-    ```bash
-    cat /dev/morse-code
-    ```
+```bash
+cat /dev/morse-code
+```
 
     Outputs the sequence of dots (.), dashes (-), letter spaces (single space), and word spaces (three spaces).
 
@@ -91,16 +100,16 @@ To read the sequence of Morse symbols from the FIFO:
 
     For example, led0.
 
-    Set the LED Trigger to Morse Code:
-    ```bash
-    echo morse-code | sudo tee /sys/class/leds/led0/trigger
-    ```
+Set the LED Trigger to Morse Code:
+```bash
+echo morse-code | sudo tee /sys/class/leds/led0/trigger
+```
 ## Verify the LED Trigger:
-    ```bash
-    cat /sys/class/leds/led0/trigger
+```bash
+cat /sys/class/leds/led0/trigger
 
-    You should see morse-code listed among the available triggers.
-    ```
+You should see morse-code listed among the available triggers.
+```
 ## Limitations
 
     Character Support: Supports only A-Z letters and spaces.
